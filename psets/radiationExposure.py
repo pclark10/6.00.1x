@@ -1,7 +1,7 @@
 def f(x):
     import math
     return 10*math.e**(math.log(0.5)/5.27 * x)
-    
+
 def radiationExposure(start, stop, step):
     '''
     Computes and returns the amount of radiation exposed
@@ -17,4 +17,9 @@ def radiationExposure(start, stop, step):
     returns: float, the amount of radiation exposed to 
       between start and stop times.
     '''
-    
+    # FILL IN YOUR CODE HERE...
+    result=0
+    while start < stop:
+        result += step*f(start)
+        start+=step
+    return result

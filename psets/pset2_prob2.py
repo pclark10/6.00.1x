@@ -1,3 +1,7 @@
+## do not include these vars in submission###########
+balance=3926
+annualInterestRate=0.2
+#####################################################
 monthlyPayment=0
 monthlyUnpaidBalance=0
 updatedBalance=balance
