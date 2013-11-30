@@ -116,7 +116,6 @@ def buildCoder(shift):
             x = string.ascii_lowercase[(i-26)+shift]
         alpha[ltr] = x
     return alpha
-    # return "Not yet implemented." # Remove this comment when you code the function
 
 def applyCoder(text, coder):
     """
@@ -127,7 +126,13 @@ def applyCoder(text, coder):
     returns: text after mapping coder chars to original text
     """
     ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    newtext = ''
+    for ltr in text:
+        try:
+            newtext += coder[ltr]
+        except KeyError:
+            newtext += ltr
+    return newtext
 
 def applyShift(text, shift):
     """
@@ -142,7 +147,7 @@ def applyShift(text, shift):
     """
     ### TODO.
     ### HINT: This is a wrapper function.
-    return "Not yet implemented." # Remove this comment when you code the function
+    return applyCoder(text, buildCoder(shift))
 
 #
 # Problem 2: Decryption
