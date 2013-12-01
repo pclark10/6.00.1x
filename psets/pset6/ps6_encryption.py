@@ -5,7 +5,7 @@
 import string
 import random
 
-WORDLIST_FILENAME = "C:/Users/Trish/Documents/GitHub/6.00.1x/psets/pset6/words.txt"
+WORDLIST_FILENAME = "C:/Users/KQ195D/Documents/GitHub/6.00.1x/psets/pset6/words.txt"
 
 # -----------------------------------
 # Helper code
@@ -80,7 +80,7 @@ def getStoryString():
     """
     Returns a story in encrypted text.
     """
-    return open("C:/Users/Trish/Documents/GitHub/6.00.1x/psets/pset6/story.txt", "r").read()
+    return open("C:/Users/KQ195D/Documents/GitHub/6.00.1x/psets/pset6/story.txt", "r").read()
 
 
 # (end of helper code)
@@ -162,8 +162,8 @@ def findBestShift(wordList, text):
     ### TODO
     maxwords = 0
     bestshift = 0
-    count = 0
     for shift in range(26):
+        count = 0
         newtext = applyShift(text, shift)
         words = newtext.split(' ')
         for word in words:
@@ -185,14 +185,23 @@ def decryptStory():
     returns: string - story in plain text
     """
     ### TODO.
+    
     wordList = loadWords()
-    story = ''
-    words = getStoryString().split(' ')
-    for i in words:
-        shift = findBestShift(wordList, i)
-        new = applyShift(i,shift)
-        story += new+' '
-    return story
+    story = getStoryString()
+    shift = findBestShift(wordList,story)
+    return applyShift(story,shift)
+    
+    # Attempt 2
+    #wordList = loadWords()
+    #story = ''
+    #words = getStoryString().split(' ')
+    #for i in words:
+    #    shift = findBestShift(wordList, i)
+    #    new = applyShift(i,shift)
+    #    story += new+' '
+    #return story
+    #
+    # Attempt 1
     #return applyShift(getStoryString(), findBestShift(loadWords(), getStoryString()))
     #return "Not yet implemented." # Remove this comment when you code the function
 
