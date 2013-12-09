@@ -113,14 +113,12 @@ class SummaryTrigger(WordTrigger):
 # Composite Triggers
 # Problems 6-8
 
-# TODO: NotTrigger
 class NotTrigger(Trigger):
     def __init__(self, trigger):
         self.trigger = trigger
     def evaluate(self, stry):
         return not self.trigger.evaluate(stry)
 
-# TODO: AndTrigger
 class AndTrigger(Trigger):
     def __init__(self, trig1, trig2):
         self.trig1 = trig1
@@ -128,7 +126,6 @@ class AndTrigger(Trigger):
     def evaluate(self, stry):
         return self.trig1.evaluate(stry) and self.trig2.evaluate(stry)
 
-# TODO: OrTrigger
 class OrTrigger(Trigger):
     def __init__(self, trig1, trig2):
         self.trig1 = trig1
@@ -139,8 +136,13 @@ class OrTrigger(Trigger):
 # Phrase Trigger
 # Question 9
 
-# TODO: PhraseTrigger
-
+class PhraseTrigger(Trigger):
+    def __init__(self, phrase):
+        self.phrase = phrase
+    def evaluate(self, stry):
+        return self.phrase in stry.getTitle() or \
+        self.phrase in stry.getSubject() or \
+        self.phrase in stry.getSummary()
 
 #======================
 # Part 3
