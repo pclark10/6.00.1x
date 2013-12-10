@@ -155,14 +155,14 @@ def filterStories(stories, triggerlist):
 
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
-    # TODO: Problem 10
-    storylist=[]
-    for i in stories:
+    storylist=stories
+    ret_storylist=[]
+    for i in storylist:
         for x in triggerlist:
             if x.evaluate(i) == True:
-                if i not in storylist:
-                    storylist += i
-                    return i
+                if i not in ret_storylist:
+                    ret_storylist.append(i)
+    return ret_storylist
     
     # This is a placeholder (we're just returning all the stories, with no filtering) 
     #return stories
@@ -188,6 +188,15 @@ def makeTrigger(triggerMap, triggerType, params, name):
     Returns a new instance of a trigger (ex: TitleTrigger, AndTrigger).
     """
     # TODO: Problem 11
+    if triggerType == 'SUBJECT':
+        triggerMap[name] = SubjectTrigger(params)
+        return SubjectTrigger(params)
+    if triggerType == 'TITLE':
+        triggerMap[name] = TitleTrigger(params)
+        return TitleTrigger(params)
+    if triggerType == 'PHRASE':
+        triggerMap[name] = PhraseTrigger(params)
+        return PhraseTrigger(params)
 
 
 def readTriggerConfig(filename):
