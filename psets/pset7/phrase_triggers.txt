@@ -1,0 +1,5 @@
+t1 PHRASE NASA
+t2 PHRASE Curiosity rover
+t3 NOT t2
+t4 OR t1 t2
+ADD t1 t2 t3 t4

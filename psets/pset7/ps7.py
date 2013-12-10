@@ -187,16 +187,35 @@ def makeTrigger(triggerMap, triggerType, params, name):
 
     Returns a new instance of a trigger (ex: TitleTrigger, AndTrigger).
     """
-    # TODO: Problem 11
     if triggerType == 'SUBJECT':
-        triggerMap[name] = SubjectTrigger(params)
-        return SubjectTrigger(params)
+        subj = SubjectTrigger(params[0])
+        triggerMap[name] = subj
+        return subj
     if triggerType == 'TITLE':
-        triggerMap[name] = TitleTrigger(params)
-        return TitleTrigger(params)
+        t1 = TitleTrigger(params[0])
+        triggerMap[name] = t1
+        return t1
+    if triggerType == 'SUMMARY':
+        summ = SummaryTrigger(params[0])
+        triggerMap[name] = summ
+        return summ
     if triggerType == 'PHRASE':
-        triggerMap[name] = PhraseTrigger(params)
-        return PhraseTrigger(params)
+        p1 = ' '
+        phrase = PhraseTrigger(p1.join(params))
+        triggerMap[name] = phrase
+        return phrase
+    if triggerType == 'NOT':
+        n1 = NotTrigger(triggerMap[params[0]])
+        triggerMap[name] = n1
+        return n1
+    if triggerType == 'AND':
+        and1 = AndTrigger(triggerMap[params[0]], triggerMap[params[1]])
+        triggerMap[name] = and1
+        return and1
+    if triggerType == 'OR':
+        or1 = OrTrigger(triggerMap[params[0]], triggerMap[params[1]])
+        triggerMap[name] = or1
+        return or1
 
 
 def readTriggerConfig(filename):
@@ -225,7 +244,6 @@ def readTriggerConfig(filename):
     for line in lines:
 
         linesplit = line.split(" ")
-
         # Making a new trigger
         if linesplit[0] != "ADD":
             trigger = makeTrigger(triggerMap, linesplit[1],
@@ -248,15 +266,15 @@ def main_thread(master):
     # this with something more configurable in Problem 11
     try:
         # These will probably generate a few hits...
-        t1 = TitleTrigger("Obama")
-        t2 = SubjectTrigger("Romney")
-        t3 = PhraseTrigger("Election")
-        t4 = OrTrigger(t2, t3)
-        triggerlist = [t1, t4]
+        #t1 = TitleTrigger("Obama")
+        #t2 = SubjectTrigger("Romney")
+        #t3 = PhraseTrigger("Election")
+        #t4 = OrTrigger(t2, t3)
+        #triggerlist = [t1, t4]
         
         # TODO: Problem 11
         # After implementing makeTrigger, uncomment the line below:
-        # triggerlist = readTriggerConfig("triggers.txt")
+        triggerlist = readTriggerConfig("triggers.txt")
 
         # **** from here down is about drawing ****
         frame = Frame(master)
