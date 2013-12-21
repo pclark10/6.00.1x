@@ -1,0 +1,5 @@
+eric = Frob('eric')
+andrew = Frob('andrew')
+ruth = Frob('ruth')
+fred = Frob('fred')
+martha = Frob('martha')
