@@ -28,7 +28,7 @@ class edx(object):
         for course in courses:
             self.myCourses.append(courseInfo(course))
 
-    def setGrade(self, grade, course=""):
+    def setGrade(self, grade, course="6.01x"):
         """
         grade: integer greater than or equal to 0 and less than or equal to 100
         course: string 
@@ -41,10 +41,10 @@ class edx(object):
         The method does not return a value.
         """
         for c in self.myCourses:
-            if c.courseName == course:
+            if c.courseName == course and c.grade == 'No Grade':
                 c.grade = grade
 
-    def getGrade(self, course=""): #course="6.02x"
+    def getGrade(self, course="6.02x"):
         """
         course: string 
 
@@ -53,13 +53,13 @@ class edx(object):
         returns: the integer grade for `course`.  
         If `course` was not part of the initialization, returns -1.
         """
-        if course == "":
-            return -1
         for c in self.myCourses:
             if c.courseName == course:
                 return c.grade
+        else:
+            return -1
 
-    def setPset(self, pset, score, course=""):
+    def setPset(self, pset, score, course="6.00x"):
         """
         pset: a string or a number
         score: an integer between 0 and 100
@@ -71,26 +71,16 @@ class edx(object):
         If `course` is not part of the initialization, then no pset score is set,
         and no error is thrown.
         """
-        if course == "":
-            return
-        index = -1
+        check = 0
         for c in self.myCourses:
             if c.courseName == course:
                 for i in range(len(c.psetsDone)):
                     if c.psetsDone[i][0] == pset:
-                        print pset,score
-                        index = i
-                if index != -1:
-                    c.psetsDone[i] = (pset,score)
-                else:
+                        check = 1
+                if check == 0:
                     c.psetsDone.append((pset, score))
-                    
                 
-                #if c.psetsDone == []:
-                #    c.psetsDone = {}
-                #c.psetsDone[pset] = score
-
-    def getPset(self, pset, course=""):
+    def getPset(self, pset, course="6.00x"):
         """
         pset: a string or a number
         score: an integer between 0 and 100
@@ -100,13 +90,15 @@ class edx(object):
         `course` using the courseInfo object.
         If `course` was not part of the initialization, returns -1.
         """
-        if course == "":
-            return -1
         for c in self.myCourses:
             if c.courseName == course:
                 for i in c.psetsDone:
                     if i[0] == pset:
                         return i[1]
+                else:
+                    return None
+        else:
+            return -1
 
 
 edX = edx( ["6.00x","6.01x","6.02x"] )

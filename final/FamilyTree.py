@@ -124,13 +124,24 @@ class Family(object):
         a -- string that is the name of a
         b -- string that is the name of b
         """
-        if a == b:
-            return (-1, 0)
-        elif self.is_parent(a, b) or self.is_parent(b, a):
-            return (-1, 1)
-        else:
+        nodeA = self.names_to_nodes[a]
+        nodeB = self.names_to_nodes[b]
+        ancestorsA = [nodeA]
+        ancestorsB = [nodeB]
+        
+        while nodeA != self.root:
+            nodeA = nodeA.get_parent()
+            ancestorsA.append(nodeA)
             
-        raise NotImplementedError()
+        while nodeB not in ancestorsA:
+            nodeB = nodeB.get_parent()
+            ancestorsB.append(nodeB)
+        
+        ancestorsA = ancestorsA[:ancestorsA.index(nodeB) + 1]
+    
+        lenA = len(ancestorsA)
+        lenB = len(ancestorsB)
+        return (min(lenA, lenB) - 2, abs(lenA - lenB))
 
 
 f = Family("a")
